@@ -5,6 +5,7 @@ import {LatLngExpression} from 'leaflet'
 import L from 'leaflet';
 
 // delete L.Icon.Default.prototype;
+// @ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
