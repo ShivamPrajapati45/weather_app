@@ -1,6 +1,6 @@
 import { useFavorite } from "@/hooks/use-favorite";
 import { useWeatherQuery } from "@/hooks/use-weather";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
+import * as ScrollArea  from "@radix-ui/react-scroll-area";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Loader2, X } from "lucide-react";
@@ -23,19 +23,27 @@ const FavoriteCities = () => {
     return (
         <>
             <h1 className="text-xl font-semibold tracking-tight">Favorites Cities</h1>
-            <ScrollArea className="w-full rounded-lg">
+
+            <ScrollArea.Root className="w-full overflow-hidden rounded-lg">
+                <ScrollArea.Viewport className="w-full whitespace-nowrap">
                 <div className="flex gap-4">
-                    {favorites.map((city) => {
-                        return (
-                            <FavoriteCityTablet
-                                key={city?.id}
-                                {...city}
-                                onRemove={() => removeFavorite.mutate(city.id)}
-                            />
-                        )
-                    })}
+                    {favorites.map((city) => (
+                    <FavoriteCityTablet
+                        key={city?.id}
+                        {...city}
+                        onRemove={() => removeFavorite.mutate(city.id)}
+                    />
+                    ))}
                 </div>
-            </ScrollArea>
+                </ScrollArea.Viewport>
+
+                <ScrollArea.Scrollbar
+                    orientation="horizontal"
+                    className="flex touch-none select-none p-0.5 transition-all"
+                    >
+                    <ScrollArea.Thumb className="flex-1 bg-gray-500 rounded-full" />
+                </ScrollArea.Scrollbar>
+            </ScrollArea.Root>
         </>
     )
 };
