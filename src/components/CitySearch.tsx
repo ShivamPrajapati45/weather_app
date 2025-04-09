@@ -48,7 +48,7 @@ const CitySearch = () => {
                 value={query}
                 onValueChange={setQuery} 
             />
-            <CommandList>
+            <CommandList className="overflow-y-scroll scrollbar-thin-custom">
                 {query.length > 2 && !isLoading && (
                     <CommandEmpty>No cities found.</CommandEmpty>
                 )}

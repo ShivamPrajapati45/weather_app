@@ -2,11 +2,12 @@ import CurrentWeather from "@/components/CurrentWeather";
 import FavoriteButton from "@/components/FavoriteButton";
 import HourlyTemperature from "@/components/HourlyTemprature";
 import LoadingSkeleton from "@/components/Loading-skeleton";
+import Map from "@/components/Map";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import WeatherDetail from "@/components/WeatherDetail";
 import WeatherForecast from "@/components/WeatherForecast";
 import { useForecastQuery, useWeatherQuery } from "@/hooks/use-weather";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Crosshair } from "lucide-react";
 import { useParams, useSearchParams } from "react-router-dom"
 
 const CityPage = () => {
@@ -21,6 +22,7 @@ const CityPage = () => {
 
     const weatherQuery = useWeatherQuery(coordinates);
     const forecastQuery = useForecastQuery(coordinates);
+    // console.log(forecastQuery.data)
 
     if(weatherQuery.error || forecastQuery.error){
         return (
@@ -40,8 +42,8 @@ const CityPage = () => {
 
     return (
         <div className="space-y-4">
-            {/* Favorite Cities */}
-            <div className="flex items-center justify-between">
+
+            <div className="flex px-3 items-center justify-between">
                 <h1 className="text-3xl font-bold tracking-tight">
                     {params?.cityName}, {weatherQuery?.data?.sys?.country}
                 </h1>
@@ -51,23 +53,32 @@ const CityPage = () => {
                     />
                 </div>
             </div>
-            {/* Current and hourly weather */}
-            <div className="grid gap-6">
+
+            <div className="grid gap-10">
                 <div className="flex flex-col gap-4">
-                    {/* Current Weather */}
                     <CurrentWeather 
                         data={weatherQuery?.data} 
                     />
-                     {/* hourly temprature */}
                     <HourlyTemperature
                         data={forecastQuery?.data}
                     />
                 </div>
+                <div className="space-y-2">
+                    <h2 className="text-lg font-semibold flex items-center gap-2">
+                        <Crosshair className="h-5 w-5 text-blue-500" />
+                        Current Location Map by Coordinates
+                    </h2>
+                    <Map 
+                        data={weatherQuery.data}
+                    />
+                </div>
                 <div className="grid gap-6 md:grid-cols-2 items-start">
-                    {/* Weather Details */}
-                    <WeatherDetail data={weatherQuery?.data}/>
-                    {/* forecast details */}
-                    <WeatherForecast data={forecastQuery?.data}/>
+                    <WeatherDetail 
+                        data={weatherQuery?.data}
+                    />
+                    <WeatherForecast 
+                        data={forecastQuery?.data}
+                    />
                 </div>
             </div>
         </div>

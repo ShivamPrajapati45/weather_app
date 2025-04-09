@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Loader2, X } from "lucide-react";
 import { toast } from "sonner";
+import { useState } from "react";
 
 interface FavoriteCityProps{
     id: string;
@@ -21,8 +22,8 @@ const FavoriteCities = () => {
 
     return (
         <>
-            <h1 className="text-xl font-bold tracking-tight">Favorites</h1>
-            <ScrollArea className="w-full pb-4">
+            <h1 className="text-xl font-semibold tracking-tight">Favorites Cities</h1>
+            <ScrollArea className="w-full rounded-lg">
                 <div className="flex gap-4">
                     {favorites.map((city) => {
                         return (
@@ -48,43 +49,52 @@ function FavoriteCityTablet({
 }: FavoriteCityProps){
     const navigate = useNavigate();
     const {data: weather, isLoading} = useWeatherQuery({lat, lon});
+    const [hover, setHover] = useState<boolean>(false);
+
 
     return (
         <div
             onClick={() => navigate(`/city/${name}?lat=${lat}&lon=${lon}`)}
             role="button"
             tabIndex={0}
-            className="relative flex cursor-pointer min-w-[250px] items-center gap-3 bg-card rounded-lg border p-4 pr-8 shadow-sm transition-all hover:shadow-md"
+            className="relative dark:hover:bg-[#121212] flex cursor-pointer min-w-[250px] items-center bg-card rounded-lg border px-4 py-4 shadow-sm transition-all hover:shadow-md"
         >
             <Button
                 variant={'ghost'}
                 size={'icon'}
-                className="absolute ring-1 top-1 h-6 w-6 rounded-full p-0 hover:text-destructive-foreground group-hover:opacity-100"
+                className="absolute left-1.5 opacity-70 hover:scale-110 hover:opacity-100 transition-all top-1 h-5 w-5 rounded-full p-0 hover:text-destructive-foreground group-hover:opacity-100 cursor-pointer"
                 onClick={(e) => {
                     e.stopPropagation();
                     onRemove(id);
                     toast.error(`Removed ${name} from Favorites`)
                 }}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
             >
-                <X className="h-4 w-4"/>
+                <X className="h-3 w-3"/>
+                {hover && (
+                    <span className="absolute transition-all top-5 text-white duration-200 text-nowrap bg-gray-800 rounded-sm text-xs p-1">
+                        Remove from Favorites
+                    </span>
+                )}
             </Button>
 
             {isLoading ? (
-                <div className="flex h-8 items-center justify-center">
-                    <Loader2 className="h-4 w-4 animate-spin"/>
+                <div className="flex h-8 w-full items-center justify-center">
+                    <Loader2 className="h-5 w-5 animate-spin"/>
                 </div>
             ) : weather ? (
-                <>
-                    <div className="flex items-center gap-2">
+                <div className="w-full flex items-center px-2 justify-center">
+                    <div className="flex flex-col items-center">
                         <img 
-                            src={`https://openweathermap.org/img/wn/${weather.weather[0]?.icon}.png`} 
+                            src={`https://openweathermap.org/img/wn/${weather?.weather[0]?.icon}.png`} 
                             className='h-8 w-8'
-                            alt={weather?.weather[0].description}
+                            alt={weather?.weather[0]?.description}
                         />
-                        <div className='absolute border-0 text-center'>
+                        <div className='text-center flex gap-1 items-center'>
                             <p className="font-medium">{name}</p>
                             <p className='text-xs text-muted-foreground'>
-                                {weather?.sys.country}
+                                {weather?.sys?.country}
                             </p>
                         </div>
                     </div>
@@ -96,7 +106,7 @@ function FavoriteCityTablet({
                             {weather.weather[0].description}
                         </p>
                     </div>
-                </>
+                </div>
             ) : null}
         </div>
     )

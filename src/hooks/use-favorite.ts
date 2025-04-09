@@ -53,6 +53,7 @@ export function useFavorite(){
 
     const removeFavorite = useMutation({
         mutationFn: async (cityId: string) => {
+            console.log(cityId)
             const newFavorites = favorites.filter((city) => city.id !== cityId)
             setFavorites(newFavorites);
             return newFavorites;

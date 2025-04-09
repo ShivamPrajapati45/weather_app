@@ -43,6 +43,7 @@ const WeatherForecast = ({data}: ForecastProps) => {
         return acc;
     }, {} as Record<string, DailyForecast>);
 
+
     const formatTemp = (temp: number) => `${Math.round(temp)}°`
     // converting objects to array
     const nextDays = Object.values(dailyForecasts).slice(0, 6);
@@ -50,44 +51,51 @@ const WeatherForecast = ({data}: ForecastProps) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>5 Day Forecast</CardTitle>
+                <CardTitle className="text-lg">5-Day Weather Forecast</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="grid gap-4">
+                <div className="grid gap-2">
                     {nextDays.map((day) => {
                         return (
                             <div key={day.date}
-                                className="grid grid-cols-3 items-center gap-4 rounded-lg border p-4"
+                                className="grid grid-cols-3 hover:bg-gray-100 dark:bg-[#121212] dark:hover:bg-[#212121] transition-all duration-200 items-center rounded-lg border p-4"
                             >
-                                <div>
-                                    <p className="font-medium">
-                                        {format(new Date(day.date * 1000), "EEE, MMM d")}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground capitalize">
-                                        {day.weather.description}
-                                    </p>
+                                <div className="flex gap-2 items-center">
+                                    <img 
+                                        src={`https://openweathermap.org/img/wn/${day.weather?.icon}@4x.png`} 
+                                        className='h-12 w-12 object-contain rounded-full'
+                                        alt={day.weather?.description}
+                                    />
+                                    <div>
+                                        <p className="font-medium">
+                                            {format(new Date(day.date * 1000), "EEE, MMM d")}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground capitalize">
+                                            {day.weather.description}
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div className='flex justify-center gap-4'>
                                     <span className='flex items-center gap-1 text-blue-500'>
-                                        <ArrowDown className='mr-1 h-4 w-4'/>
+                                        <ArrowDown className='mr-1 h-5 w-5'/>
                                         {formatTemp(day.temp_min)}
                                     </span>
                                     <span className='flex items-center gap-1 text-red-500'>
-                                        <ArrowUp className='mr-1 h-4 w-4'/>
+                                        <ArrowUp className='mr-1 h-5 w-5'/>
                                         {formatTemp(day.temp_max)}
                                     </span>
                                 </div>
 
                                 <div className="flex justify-end gap-4">
                                     <span className="flex items-center gap-1">
-                                        <Droplets className="h-4 w-4 text-blue-500"/>
+                                        <Droplets className="h-5 w-5 text-blue-500"/>
                                         <span className="text-sm">
                                             {day.humidity}%
                                         </span>
                                     </span>
                                     <span className="flex items-center gap-1">
-                                        <Wind className="h-4 w-4 text-blue-500"/>
+                                        <Wind className="h-5 w-5 text-blue-500"/>
                                         <span className="text-sm">
                                             {day.wind}m/s
                                         </span>

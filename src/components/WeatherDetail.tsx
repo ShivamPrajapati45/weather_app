@@ -50,7 +50,7 @@ const getWindDirection = (degree: number) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Weather Details</CardTitle>
+                <CardTitle className="text-lg">Weather Details</CardTitle>
             </CardHeader>
             <CardContent>
                 <div className="grid gap-6 sm:grid-cols-2">
