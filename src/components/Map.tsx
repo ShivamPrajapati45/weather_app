@@ -1,16 +1,7 @@
 import {MapContainer,TileLayer,Marker,Popup} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import { WeatherData } from '@/api/types';
-import L from 'leaflet';
-import markerIconPng from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-
-// Fix for marker icon not showing
-const DefaultIcon = L.icon({
-    iconUrl: markerIconPng,
-    shadowUrl: iconShadow,
-});
-L.Marker.prototype.options.icon = DefaultIcon;
+import {LatLngExpression} from 'leaflet'
 
 interface Map{
     data: WeatherData
@@ -21,11 +12,13 @@ const Map = ({data}:Map) => {
         coord: {lat,lon},
     } = data;
 
-    const center = [lat, lon] as [number, number];
+    // const center = [lat, lon] as [number, number];
+    const center: LatLngExpression = [lat, lon];
+
 
     return (
         <MapContainer
-            center={center} 
+            center={center}
             zoom={13} 
             scrollWheelZoom={false} 
             className="h-72 w-full z-0 rounded-md md:rounded-xl shadow-md"
