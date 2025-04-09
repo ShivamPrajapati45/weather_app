@@ -94,15 +94,15 @@ const Dashboard = () => {
 
     return (
         <div className="space-y-4">
-            {/* Favorite Cities */}
             <FavoriteCities/>
+
             <div className="flex items-center justify-between">
-                <h1 className="text-xl items-center flex font-bold tracking-tight">
-                    <MapPin className="h-6 w-6 text-blue-500 mr-2"/>
-                    <span>
-                        {locationName?.name},{locationName?.state}, {locationName?.country}
+                <div className="flex items-center tracking-tight">
+                    <MapPin className="h-5 w-5 md:h-6 md:w-6 text-blue-500 mr-2"/>
+                    <span className="text-base text-nowrap text-muted-foreground md:text-xl font-semibold">
+                        {locationName?.name}, {locationName?.state}, {locationName?.country}
                     </span>
-                </h1>
+                </div>
                 <Button 
                     variant={'outline'} 
                     size={'icon'}
@@ -114,16 +114,15 @@ const Dashboard = () => {
                 >
                     <RefreshCw className={`${weatherQuery.isFetching || forecastQuery.isFetching ? 'animate-spin' : ''} h-4 w-4`}/>
                     {hover && (
-                        <span className="absolute right-10 transition-all top-1 text-white font-semibold duration-200 uppercase text-nowrap bg-gray-800 rounded-sm text-xs px-2 py-1">
+                        <span className="hidden md:block absolute right-10 transition-all top-1 text-white font-semibold duration-200 uppercase text-nowrap bg-gray-800 rounded-sm text-xs px-2 py-1">
                             Refresh
                         </span>
                     )}
                 </Button>
             </div>
             
-
-            <div className="grid gap-6">
-                <div className="grid grid-cols-1 gap-5">
+            <div className="grid gap-6 w-full">
+                <div className="grid grid-cols-1 w-full gap-5">
                     <CurrentWeather 
                         data={weatherQuery?.data} 
                         locationName={locationName} 
@@ -132,10 +131,12 @@ const Dashboard = () => {
                         data={forecastQuery?.data}
                     />
                 </div>
-                <div className="space-y-2">
-                    <h2 className="text-lg font-semibold flex items-center gap-2">
+                <div className="space-y-3">
+                    <h2 className="flex items-center gap-2">
                         <Crosshair className="h-5 w-5 text-blue-500" />
-                        Current Location Map by Coordinates
+                        <span className="md:text-lg text-sm text-nowrap">
+                            Current Location Map by Coordinates
+                        </span>
                     </h2>
                     <Map 
                         data={weatherQuery.data}

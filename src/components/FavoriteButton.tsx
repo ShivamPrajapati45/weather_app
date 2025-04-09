@@ -44,7 +44,7 @@ const FavoriteButton = ({data}: FavoriteButtonProps) => {
                 className={`h-8 w-8 ${isCurrentlyFavorite ? 'fill-current' : 'fill-none'} `}
             />
             {hover && (
-                <span className="absolute right-10 transition-all top-1 text-white font-semibold duration-200 uppercase text-nowrap bg-gray-800 rounded-sm text-xs px-2 py-1">
+                <span className="absolute hidden md:block right-10 transition-all top-1 text-white font-semibold duration-200 uppercase text-nowrap bg-gray-800 rounded-sm text-xs px-2 py-1">
                     {isCurrentlyFavorite ? 'Remove from favorite' : 'Add to favorite'}
                 </span>
             )}

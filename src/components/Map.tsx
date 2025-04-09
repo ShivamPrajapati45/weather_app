@@ -28,7 +28,7 @@ const Map = ({data}:Map) => {
             center={center} 
             zoom={13} 
             scrollWheelZoom={false} 
-            className="h-72 w-full rounded-xl shadow-md"
+            className="h-72 w-full z-0 rounded-md md:rounded-xl shadow-md"
         >
             <TileLayer
                 attribution="&copy; OpenStreetMap contributors"

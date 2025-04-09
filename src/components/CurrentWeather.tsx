@@ -7,7 +7,7 @@ interface CurrentWeatherProps {
     locationName?: GeocodingResponse;
 }
 
-const CurrentWeather = ({data,locationName}: CurrentWeatherProps) => {
+const CurrentWeather = ({data}: CurrentWeatherProps) => {
 
     const {
         weather: [currentWeather],
@@ -20,26 +20,16 @@ const CurrentWeather = ({data,locationName}: CurrentWeatherProps) => {
 
     return (
         <Card className='overflow-hidden'>
-            <CardContent className='p-6'>
-                <div className='grid gap-4 md:grid-cols-2'>
-                    <div className='space-y-4'>
-                        <div className='space-y-2'>
-                            <div className='flex items-end gap-2'>
-                                <h2>{locationName?.name}</h2>
-                                {locationName?.state && (
-                                    <span className='text-muted-foreground'>
-                                        {locationName?.state}
-                                    </span>
-                                )}
-                            </div>
-                            <p className='text-sm text-muted-foreground'>
-                                {locationName?.country}
-                            </p>
-                        </div>
+            <CardContent className='p-2 md:p-6'>
+                <div className='grid gap-2 md:gap-4 md:grid-cols-2'>
 
-                        <div className='flex items-center gap-4'>
-                            <p className='text-7xl font-bold tracking-tighter'>
-                                {formatTemp(temp)}
+                    <div className='space-y-2 md:space-y-4 '>
+                        <div className='flex items-center justify-around md:justify-normal md:gap-4'>
+                            <p className='tracking-tighter flex flex-col items-center'>
+                                <span className='text-sm text-muted-foreground'>Temperature</span>
+                                <span className='text-4xl md:text-7xl font-bold'>
+                                    {formatTemp(temp)}
+                                </span>
                             </p>
                             <div className='space-y-2'>
                                 <p className='text-sm font-medium text-muted-foreground'>
@@ -58,49 +48,48 @@ const CurrentWeather = ({data,locationName}: CurrentWeatherProps) => {
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-2 gap-4 w-[500px] rounded-lg p-2'>
-                            <div className='flex items-center justify-around shadow-md p-2 rounded-md'>
-                                <Droplets className='h-8 w-8 text-blue-400'/>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:w-[500px] rounded-lg p-2'>
+                            <div className='flex border-b border-gray-600 items-center justify-around shadow-md p-2 rounded-md'>
+                                <Droplets className='h-8 w-8 text-[#00BFFF]'/>
                                 <div className='space-y-1 text-center'>
-                                    <p className='text-base font-semibold'>Humidity</p>
-                                    <p className='text-sm font-semibold'>
+                                    <p className='md:text-base text-sm md:font-semibold'>Humidity</p>
+                                    <p className='text-sm md:font-semibold text-muted-foreground md:text-white'>
                                         {humidity}%
                                     </p>
                                 </div>
                             </div>
-                            <div className='flex items-center justify-around shadow-md p-2 rounded-md'>
-                                <Wind className='h-8 w-8 text-blue-400'/>
+                            <div className='flex border-b border-gray-600 items-center justify-around shadow-md p-2 rounded-md'>
+                                <Wind className='h-8 w-8 text-[#A9A9A9]'/>
                                 <div className='space-y-1 text-center'>
-                                    <p className='text-base font-semibold'>Wind Speed</p>
-                                    <p className='text-sm font-semibold'>
+                                    <p className='md:text-base text-sm md:font-semibold'>Wind Speed</p>
+                                    <p className='text-sm md:font-semibold text-muted-foreground md:text-white'>
                                         {speed} m/s
                                     </p>
                                 </div>
                             </div>
-                            <div className='flex items-center justify-around shadow-md p-2 rounded-md'>
-                                <Wind className='h-8 w-8 text-blue-400'/>
+                            <div className='flex border-b border-gray-600 items-center justify-around shadow-md p-2 rounded-md'>
+                                <Wind className='h-8 w-8 text-[#FFA500]'/>
                                 <div className='space-y-1 text-center'>
-                                    <p className='text-base font-semibold'>Gust Speed</p>
-                                    <p className='text-sm font-semibold'>
+                                    <p className='md:text-base text-sm md:font-semibold'>Gust Speed</p>
+                                    <p className='text-sm text-muted-foreground md:font-semibold md:text-white'>
                                         {gust} m/s
                                     </p>
                                 </div>
                             </div>
-                            <div className='flex items-center justify-around shadow-md p-2 rounded-md'>
-                                <MapPin className='h-8 w-8 text-blue-400' />
+                            <div className='flex border-b border-gray-600 items-center justify-around shadow-md p-2 rounded-md'>
+                                <MapPin className='h-8 w-8 text-[#2E8B57]' />
                                 <div className='space-y-1 text-center'>
-                                    <p className='text-base font-semibold'>Coordinates</p>
-                                    <p className='text-xs  flex flex-col font-semibold'>
-                                    <span>
-                                        Lat: {lat}°, 
-                                    </span>
-                                    <span>
-                                        Lon: {lon}°
-                                    </span>
+                                    <p className='md:text-base text-sm md:font-semibold'>Coordinates</p>
+                                    <p className='text-xs text-muted-foreground flex flex-col md:font-semibold md:text-white'>
+                                        <span>
+                                            Lat: {lat}°, 
+                                        </span>
+                                        <span>
+                                            Lon: {lon}°
+                                        </span>
                                     </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

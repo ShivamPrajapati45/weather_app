@@ -22,7 +22,7 @@ const FavoriteCities = () => {
 
     return (
         <>
-            <h1 className="text-xl font-semibold tracking-tight">Favorites Cities</h1>
+            <h1 className="md:text-xl text-base font-semibold tracking-tight">Favorites Cities</h1>
 
             <ScrollArea.Root className="w-full overflow-hidden rounded-lg">
                 <ScrollArea.Viewport className="w-full whitespace-nowrap">
@@ -65,7 +65,7 @@ function FavoriteCityTablet({
             onClick={() => navigate(`/city/${name}?lat=${lat}&lon=${lon}`)}
             role="button"
             tabIndex={0}
-            className="relative dark:hover:bg-[#121212] flex cursor-pointer min-w-[250px] items-center bg-card rounded-lg border px-4 py-4 shadow-sm transition-all hover:shadow-md"
+            className="relative dark:hover:bg-[#121212] flex cursor-pointer min-w-[250px] items-center bg-card rounded-lg border md:px-4 md:py-4 px-4 py-2 shadow-sm transition-all hover:shadow-md"
         >
             <Button
                 variant={'ghost'}
@@ -81,7 +81,7 @@ function FavoriteCityTablet({
             >
                 <X className="h-3 w-3"/>
                 {hover && (
-                    <span className="absolute transition-all top-5 text-white duration-200 text-nowrap bg-gray-800 rounded-sm text-xs p-1">
+                    <span className="absolute hidden md:block transition-all top-5 text-white duration-200 text-nowrap bg-gray-800 rounded-sm text-xs p-1">
                         Remove from Favorites
                     </span>
                 )}
@@ -89,7 +89,7 @@ function FavoriteCityTablet({
 
             {isLoading ? (
                 <div className="flex h-8 w-full items-center justify-center">
-                    <Loader2 className="h-5 w-5 animate-spin"/>
+                    <Loader2 className="h-6 w-6 text-muted-foreground animate-spin"/>
                 </div>
             ) : weather ? (
                 <div className="w-full flex items-center px-2 justify-center">
@@ -107,7 +107,7 @@ function FavoriteCityTablet({
                         </div>
                     </div>
                     <div className="ml-auto text-right">
-                        <p className="text-xl font-bold">
+                        <p className="text-xl font-bold text-center">
                             {Math.round(weather.main.temp)}°
                         </p>
                         <p className="text-xs capitalize text-muted-foreground">

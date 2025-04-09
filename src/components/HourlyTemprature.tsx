@@ -7,20 +7,20 @@ interface HourlyTempProps {
     data: ForecastData
 }
 const HourlyTemperature = ({data}: HourlyTempProps) => {
-    const chartData = data.list.slice(0, 15).map((item) => ({
+    const chartData = data.list.slice(0, 6).map((item) => ({
         time: format(new Date(item.dt * 1000), "ha"),
         temp: Math.round(item.main.temp),
         feels_like: Math.round(item.main.feels_like)
     }));
     return (
-        <Card className="flex-1">
+        <Card className="w-full">
             <CardHeader>
-                <CardTitle className="text-lg">Today's Hourly Temperature</CardTitle>
+                <CardTitle className="md:text-lg text-base">Today's Hourly Temperature</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0 m-0">
                 <div className="h-[200px] w-full">
-                    <ResponsiveContainer width={'100%'} height={'100%'}>
-                        <LineChart width={500} height={300} data={chartData}>
+                    <ResponsiveContainer width='100%' height='100%'>
+                        <LineChart width={500} margin={{ top: 0, right: 10, left: -15, bottom: 0 }} height={300} data={chartData}>
                             <XAxis 
                                 dataKey='time'
                                 stroke="#888888"

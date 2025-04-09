@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import WeatherDetail from "@/components/WeatherDetail";
 import WeatherForecast from "@/components/WeatherForecast";
 import { useForecastQuery, useWeatherQuery } from "@/hooks/use-weather";
-import { AlertTriangle, Crosshair } from "lucide-react";
+import { AlertTriangle, Crosshair, MapPin } from "lucide-react";
 import { useParams, useSearchParams } from "react-router-dom"
 
 const CityPage = () => {
@@ -44,7 +44,8 @@ const CityPage = () => {
         <div className="space-y-4">
 
             <div className="flex px-3 items-center justify-between">
-                <h1 className="text-3xl font-bold tracking-tight">
+                <h1 className="md:text-3xl flex items-center text-xl font-semibold md:font-bold tracking-tight">
+                    <MapPin className="h-5 w-5 md:h-6 md:w-6 text-blue-500 mr-2"/>
                     {params?.cityName}, {weatherQuery?.data?.sys?.country}
                 </h1>
                 <div>
@@ -63,10 +64,12 @@ const CityPage = () => {
                         data={forecastQuery?.data}
                     />
                 </div>
-                <div className="space-y-2">
-                    <h2 className="text-lg font-semibold flex items-center gap-2">
+                <div className="space-y-3">
+                    <h2 className="md:text-lg md:font-semibold flex items-center gap-2">
                         <Crosshair className="h-5 w-5 text-blue-500" />
-                        Current Location Map by Coordinates
+                        <span className="md:text-lg text-sm text-nowrap">
+                            Current Location Map by Coordinates
+                        </span>
                     </h2>
                     <Map 
                         data={weatherQuery.data}

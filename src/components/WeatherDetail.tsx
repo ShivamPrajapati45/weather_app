@@ -50,17 +50,18 @@ const getWindDirection = (degree: number) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-lg">Weather Details</CardTitle>
+                <CardTitle className="md:text-lg text-base">Weather Details</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="grid gap-6 sm:grid-cols-2">
+                <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2">
                     {details.map((detail) => {
                         return (
                             <div 
                                 key={detail.title} 
-                                className="flex items-center gap-3 rounded-lg border p-4">
-                                <detail.icon className={` h-5 w-5 ${detail.color}`}/>
-                                <div>
+                                className="flex justify-between items-center gap-3 rounded-md md:rounded-lg border md:p-4 px-5 py-2"
+                            >
+                                <detail.icon className={` h-6 w-6 ${detail.color}`}/>
+                                <div className="text-center">
                                     <p className="text-sm font-medium leading-none">
                                         {detail.title}
                                     </p>
